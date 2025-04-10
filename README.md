@@ -1,6 +1,6 @@
 # SAGE: Spreadsheet Analysis Grading Engine
 
-A comprehensive Python toolkit for assessing and grading data quality in spreadsheets and databases.
+A comprehensive Python toolkit for assessing and grading data quality in spreadsheets and databases. This has been a personal project of mine to build out a python framework, and I feel confident enough to have community feedback and modification. This project aims to provide a simple-to-use framework that allows for grading and surveying a spreadsheet or database! With 4 metrics to use, you can test for various aspects of a database to find flaws. I encourage modification, so feel free to fork and edit this library! 
 
 ## Features
 
