@@ -114,8 +114,9 @@ class DataProfiler:
             return {}
         
         col_data = self.data[column]
-        is_numeric = pd.api.types.is_numeric_dtype(col_data)
+        is_numeric = pd.api.types.is_numeric_dtype(col_data) and not pd.api.types.is_bool_dtype(col_data)
         is_categorical = pd.api.types.is_categorical_dtype(col_data) or len(col_data.dropna().unique()) < min(20, len(col_data.dropna()) / 10)
+        is_boolean = pd.api.types.is_bool_dtype(col_data)
         
         # Base statistics for all types
         profile = {
@@ -127,12 +128,14 @@ class DataProfiler:
             'unique_percent': float(col_data.nunique() / len(col_data.dropna()) if len(col_data.dropna()) > 0 else 0),
             'is_numeric': is_numeric,
             'is_categorical': is_categorical,
+            'is_boolean': is_boolean,
             'memory_usage': col_data.memory_usage(deep=True),
             'samples': col_data.dropna().sample(min(5, len(col_data.dropna()))).tolist() if not col_data.empty else []
         }
         
         # Add numeric statistics if applicable
         if is_numeric:
+            # Only try to calculate quantiles and other numeric stats for non-boolean numeric data
             profile.update({
                 'min': float(col_data.min()) if not col_data.dropna().empty else None,
                 'max': float(col_data.max()) if not col_data.dropna().empty else None,
@@ -145,6 +148,16 @@ class DataProfiler:
                 'kurtosis': float(col_data.kurtosis()) if len(col_data.dropna()) > 2 else None,
                 'zero_count': (col_data == 0).sum(),
                 'negative_count': (col_data < 0).sum() if not col_data.dropna().empty else 0
+            })
+        # Add boolean statistics
+        elif is_boolean:
+            true_count = col_data.sum()
+            false_count = (~col_data).sum()
+            profile.update({
+                'true_count': int(true_count),
+                'false_count': int(false_count),
+                'true_percent': float(true_count / len(col_data.dropna()) if len(col_data.dropna()) > 0 else 0),
+                'most_common': 'True' if true_count >= false_count else 'False'
             })
         
         # Add categorical statistics if applicable
