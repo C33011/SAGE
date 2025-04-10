@@ -1,0 +1,21 @@
+Welcome to SAGE's documentation!
+================================
+
+**S**\ preadsheet **A**\ nalysis **G**\ rading **E**\ ngine
+
+SAGE is a comprehensive toolkit for assessing and grading data quality in spreadsheets and databases.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   installation
+   usage
+   api
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
