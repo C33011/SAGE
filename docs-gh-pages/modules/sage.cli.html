@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sage.cli package &mdash; SAGE 0.1.1 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="canonical" href="https://c33011.github.io/sage/modules/sage.cli.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=48654df3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="sage.config package" href="sage.config.html" />
+    <link rel="prev" title="sage package" href="sage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SAGE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SAGE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="sage.html">sage package</a></li>
+      <li class="breadcrumb-item active">sage.cli package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sage-cli-package">
+<h1>sage.cli package<a class="headerlink" href="#sage-cli-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="sage-cli-commands-module">
+<h2>sage.cli.commands module<a class="headerlink" href="#sage-cli-commands-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-sage.cli.formatters">
+<span id="sage-cli-formatters-module"></span><h2>sage.cli.formatters module<a class="headerlink" href="#module-sage.cli.formatters" title="Link to this heading"></a></h2>
+<p>CLI output formatters for SAGE.</p>
+<p>This module provides functions for formatting and displaying output
+in the command-line interface, including tables, colors, and rich text.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Colors</span></span><a class="reference internal" href="../_modules/sage/cli/formatters.html#Colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.Colors" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.RESET">
+<span class="sig-name descname"><span class="pre">RESET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[0m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.RESET" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BOLD">
+<span class="sig-name descname"><span class="pre">BOLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[1m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BOLD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.UNDERLINE">
+<span class="sig-name descname"><span class="pre">UNDERLINE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[4m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.UNDERLINE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[30m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BLACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[31m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.RED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.GREEN">
+<span class="sig-name descname"><span class="pre">GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[32m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.YELLOW">
+<span class="sig-name descname"><span class="pre">YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[33m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.YELLOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BLUE">
+<span class="sig-name descname"><span class="pre">BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[34m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BLUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.MAGENTA">
+<span class="sig-name descname"><span class="pre">MAGENTA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[35m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.MAGENTA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.CYAN">
+<span class="sig-name descname"><span class="pre">CYAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[36m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.CYAN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[37m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.WHITE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_BLACK">
+<span class="sig-name descname"><span class="pre">BRIGHT_BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[90m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_BLACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_RED">
+<span class="sig-name descname"><span class="pre">BRIGHT_RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[91m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_RED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_GREEN">
+<span class="sig-name descname"><span class="pre">BRIGHT_GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[92m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_YELLOW">
+<span class="sig-name descname"><span class="pre">BRIGHT_YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[93m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_YELLOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_BLUE">
+<span class="sig-name descname"><span class="pre">BRIGHT_BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[94m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_BLUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_MAGENTA">
+<span class="sig-name descname"><span class="pre">BRIGHT_MAGENTA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[95m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_MAGENTA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_CYAN">
+<span class="sig-name descname"><span class="pre">BRIGHT_CYAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[96m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_CYAN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BRIGHT_WHITE">
+<span class="sig-name descname"><span class="pre">BRIGHT_WHITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[97m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BRIGHT_WHITE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_BLACK">
+<span class="sig-name descname"><span class="pre">BG_BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[40m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_BLACK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_RED">
+<span class="sig-name descname"><span class="pre">BG_RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[41m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_RED" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_GREEN">
+<span class="sig-name descname"><span class="pre">BG_GREEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[42m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_GREEN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_YELLOW">
+<span class="sig-name descname"><span class="pre">BG_YELLOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[43m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_YELLOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_BLUE">
+<span class="sig-name descname"><span class="pre">BG_BLUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[44m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_BLUE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_MAGENTA">
+<span class="sig-name descname"><span class="pre">BG_MAGENTA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[45m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_MAGENTA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_CYAN">
+<span class="sig-name descname"><span class="pre">BG_CYAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[46m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_CYAN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sage.cli.formatters.Colors.BG_WHITE">
+<span class="sig-name descname"><span class="pre">BG_WHITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[47m'</span></em><a class="headerlink" href="#sage.cli.formatters.Colors.BG_WHITE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.supports_color">
+<span class="sig-name descname"><span class="pre">supports_color</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#supports_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.supports_color" title="Link to this definition"></a></dt>
+<dd><p>Check if the terminal supports color output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if color is supported, False otherwise</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.colorize">
+<span class="sig-name descname"><span class="pre">colorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#colorize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.colorize" title="Link to this definition"></a></dt>
+<dd><p>Add color to text for terminal output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – Text to colorize</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Color code from Colors class</p></li>
+<li><p><strong>use_color</strong> (<em>bool</em><em> | </em><em>None</em>) – Override color support detection</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Colorized text if supported, original text otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.format_output">
+<span class="sig-name descname"><span class="pre">format_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'text'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#format_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.format_output" title="Link to this definition"></a></dt>
+<dd><p>Format output data in various formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Any</em>) – Data to format</p></li>
+<li><p><strong>format</strong> (<em>str</em>) – Output format (text, json, yaml)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_banner">
+<span class="sig-name descname"><span class="pre">print_banner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_banner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_banner" title="Link to this definition"></a></dt>
+<dd><p>Print a banner with the specified text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – Text to display in the banner</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of the banner</p></li>
+<li><p><strong>char</strong> (<em>str</em>) – Character to use for the banner</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_section">
+<span class="sig-name descname"><span class="pre">print_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_section" title="Link to this definition"></a></dt>
+<dd><p>Print a section title.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Section title</p></li>
+<li><p><strong>underline</strong> (<em>bool</em>) – Whether to add an underline</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_table">
+<span class="sig-name descname"><span class="pre">print_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">120</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_table" title="Link to this definition"></a></dt>
+<dd><p>Print a table of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – List of dictionaries to display as a table</p></li>
+<li><p><strong>columns</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional list of columns to include</p></li>
+<li><p><strong>sort_by</strong> (<em>str</em><em> | </em><em>None</em>) – Optional column to sort by</p></li>
+<li><p><strong>max_width</strong> (<em>int</em>) – Maximum width of the table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_result">
+<span class="sig-name descname"><span class="pre">print_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_result" title="Link to this definition"></a></dt>
+<dd><p>Print the results of an assessment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Assessment result dictionary</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_error">
+<span class="sig-name descname"><span class="pre">print_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_error" title="Link to this definition"></a></dt>
+<dd><p>Print an error message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>str</em>) – Error message to print</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_warning">
+<span class="sig-name descname"><span class="pre">print_warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_warning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_warning" title="Link to this definition"></a></dt>
+<dd><p>Print a warning message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>str</em>) – Warning message to print</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.print_success">
+<span class="sig-name descname"><span class="pre">print_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#print_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.print_success" title="Link to this definition"></a></dt>
+<dd><p>Print a success message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>str</em>) – Success message to print</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sage.cli.formatters.get_terminal_size">
+<span class="sig-name descname"><span class="pre">get_terminal_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/cli/formatters.html#get_terminal_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.cli.formatters.get_terminal_size" title="Link to this definition"></a></dt>
+<dd><p>Get the size of the terminal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of (width, height)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tuple</em>[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="sage-cli-help-module">
+<h2>sage.cli.help module<a class="headerlink" href="#sage-cli-help-module" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sage.html" class="btn btn-neutral float-left" title="sage package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sage.config.html" class="btn btn-neutral float-right" title="sage.config package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tate Matthews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

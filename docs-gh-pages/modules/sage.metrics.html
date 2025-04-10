@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metrics &mdash; SAGE 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SAGE
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SAGE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metrics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/sage.metrics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metrics">
+<h1>Metrics<a class="headerlink" href="#metrics" title="Link to this heading"></a></h1>
+<section id="base-metric">
+<h2>Base Metric<a class="headerlink" href="#base-metric" title="Link to this heading"></a></h2>
+<p id="module-sage.metrics.base_metric">Base metric implementation for SAGE.</p>
+<p>This module provides the foundation for all metrics used in SAGE data quality assessments.
+It defines the BaseMetric class with common functionality and interfaces.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.metrics.base_metric.BaseMetric">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sage.metrics.base_metric.</span></span><span class="sig-name descname"><span class="pre">BaseMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/base_metric.html#BaseMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.base_metric.BaseMetric" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all SAGE metrics.</p>
+<p>This abstract class defines the common interface and functionality
+that all metrics should implement.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.base_metric.BaseMetric.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/base_metric.html#BaseMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.base_metric.BaseMetric.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a base metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the metric (default: class name)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.base_metric.BaseMetric.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/sage/metrics/base_metric.html#BaseMetric.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.base_metric.BaseMetric.__str__" title="Link to this definition"></a></dt>
+<dd><p>Return string representation of the metric.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.base_metric.BaseMetric.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/base_metric.html#BaseMetric.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.base_metric.BaseMetric.clear" title="Link to this definition"></a></dt>
+<dd><p>Clear any configured settings or rules.</p>
+<p>This method should reset the metric to its initial state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.base_metric.BaseMetric.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sage/metrics/base_metric.html#BaseMetric.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.base_metric.BaseMetric.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the metric on a dataframe.</p>
+<p>This is the main method that should be implemented by all metrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame to evaluate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>score: Float between 0 and 1</p></li>
+<li><p>status: “passed”, “warning”, “failed”, or “skipped”</p></li>
+<li><p>message: Human-readable description of the results</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary with evaluation results including at least</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If the subclass doesn’t implement this method</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="completeness">
+<h2>Completeness<a class="headerlink" href="#completeness" title="Link to this heading"></a></h2>
+<p id="module-sage.metrics.completeness">Completeness metric implementation for SAGE.</p>
+<p>This module provides the CompletenessMetric class for measuring
+the presence of non-null values in data.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.metrics.completeness.CompletenessMetric">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sage.metrics.completeness.</span></span><span class="sig-name descname"><span class="pre">CompletenessMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/completeness.html#CompletenessMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.completeness.CompletenessMetric" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sage.metrics.base_metric.BaseMetric" title="sage.metrics.base_metric.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>Completeness metric for measuring non-null values.</p>
+<p>This metric calculates the percentage of non-null values in the data,
+both overall and per column.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.completeness.CompletenessMetric.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/completeness.html#CompletenessMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.completeness.CompletenessMetric.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a completeness metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Optional name for this metric</p></li>
+<li><p><strong>warning_threshold</strong> – Score threshold below which status becomes ‘warning’</p></li>
+<li><p><strong>failure_threshold</strong> – Score threshold below which status becomes ‘failed’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.completeness.CompletenessMetric.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/completeness.html#CompletenessMetric.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.completeness.CompletenessMetric.clear" title="Link to this definition"></a></dt>
+<dd><p>Reset any internal state or configuration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.completeness.CompletenessMetric.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sage/metrics/completeness.html#CompletenessMetric.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.completeness.CompletenessMetric.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate completeness on a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame to evaluate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with evaluation results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="accuracy">
+<h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading"></a></h2>
+<p id="module-sage.metrics.accuracy">Accuracy metrics implementation for SAGE.</p>
+<p>This module provides the AccuracyMetric class for validating data values
+against defined rules, patterns, and allowed values.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sage.metrics.accuracy.</span></span><span class="sig-name descname"><span class="pre">AccuracyMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sage.metrics.base_metric.BaseMetric" title="sage.metrics.base_metric.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>Accuracy metric for validating data values against defined rules.</p>
+<p>This metric validates data based on various checks:
+1. Range checks (min/max values)
+2. Pattern checks (regex patterns)
+3. Categorical checks (allowed values)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize an accuracy metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Optional name for this metric</p></li>
+<li><p><strong>warning_threshold</strong> – Score threshold below which status becomes ‘warning’</p></li>
+<li><p><strong>failure_threshold</strong> – Score threshold below which status becomes ‘failed’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.add_categorical_check">
+<span class="sig-name descname"><span class="pre">add_categorical_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.add_categorical_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.add_categorical_check" title="Link to this definition"></a></dt>
+<dd><p>Add a categorical validation check for a column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Column name to validate</p></li>
+<li><p><strong>allowed_values</strong> – List of allowed values for this column</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If allowed_values is empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.add_pattern_check">
+<span class="sig-name descname"><span class="pre">add_pattern_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.add_pattern_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.add_pattern_check" title="Link to this definition"></a></dt>
+<dd><p>Add a regex pattern validation check for a string column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Column name to validate</p></li>
+<li><p><strong>pattern</strong> – Regular expression pattern that valid values must match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>re.error</strong> – If the pattern is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.add_range_check">
+<span class="sig-name descname"><span class="pre">add_range_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.add_range_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.add_range_check" title="Link to this definition"></a></dt>
+<dd><p>Add a range validation check for a numeric column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Column name to validate</p></li>
+<li><p><strong>min_value</strong> – Minimum allowed value (inclusive)</p></li>
+<li><p><strong>max_value</strong> – Maximum allowed value (inclusive)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If both min_value and max_value are None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.clear" title="Link to this definition"></a></dt>
+<dd><p>Clear all configured checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.accuracy.AccuracyMetric.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sage/metrics/accuracy.html#AccuracyMetric.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.accuracy.AccuracyMetric.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate accuracy on a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame to evaluate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with evaluation results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="consistency">
+<h2>Consistency<a class="headerlink" href="#consistency" title="Link to this heading"></a></h2>
+<p id="module-sage.metrics.consistency">Consistency metric implementation for SAGE.</p>
+<p>This module provides the ConsistencyMetric class for checking that data
+follows defined relationships and constraints across fields.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sage.metrics.consistency.</span></span><span class="sig-name descname"><span class="pre">ConsistencyMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sage.metrics.base_metric.BaseMetric" title="sage.metrics.base_metric.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>Consistency metric for validating relationships between columns.</p>
+<p>This metric ensures data integrity by checking that related values
+follow defined constraints and relationships across fields.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a consistency metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Optional name for this metric</p></li>
+<li><p><strong>warning_threshold</strong> – Score threshold below which status becomes ‘warning’</p></li>
+<li><p><strong>failure_threshold</strong> – Score threshold below which status becomes ‘failed’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric.add_comparison_check">
+<span class="sig-name descname"><span class="pre">add_comparison_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric.add_comparison_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric.add_comparison_check" title="Link to this definition"></a></dt>
+<dd><p>Add a comparison check between two columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Unique name for this rule</p></li>
+<li><p><strong>left_column</strong> – Name of the first column to compare</p></li>
+<li><p><strong>operator</strong> – Comparison operator (&lt;, &lt;=, ==, !=, &gt;=, &gt;)</p></li>
+<li><p><strong>right_column</strong> – Name of the second column to compare</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If rule with the same name already exists or operator is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric.add_relationship_check">
+<span class="sig-name descname"><span class="pre">add_relationship_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">implies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric.add_relationship_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric.add_relationship_check" title="Link to this definition"></a></dt>
+<dd><p>Add a logical relationship check between columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Unique name for this rule</p></li>
+<li><p><strong>condition</strong> – String expression that evaluates to a boolean (if condition is true…)</p></li>
+<li><p><strong>implies</strong> – String expression that should be true when condition is true</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If rule with the same name already exists</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric.clear" title="Link to this definition"></a></dt>
+<dd><p>Clear all configured rules.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.consistency.ConsistencyMetric.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sage/metrics/consistency.html#ConsistencyMetric.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.consistency.ConsistencyMetric.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate consistency on a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame to evaluate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with evaluation results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="timeliness">
+<h2>Timeliness<a class="headerlink" href="#timeliness" title="Link to this heading"></a></h2>
+<p id="module-sage.metrics.timeliness">Timeliness metric implementation for SAGE.</p>
+<p>This module provides the TimelinessMetric class for measuring
+the freshness and age-related aspects of data.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sage.metrics.timeliness.</span></span><span class="sig-name descname"><span class="pre">TimelinessMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sage.metrics.base_metric.BaseMetric" title="sage.metrics.base_metric.BaseMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetric</span></code></a></p>
+<p>Timeliness metric for measuring data freshness and age.</p>
+<p>This metric evaluates whether data is appropriately current
+based on specified age and freshness criteria.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a timeliness metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Optional name for this metric</p></li>
+<li><p><strong>warning_threshold</strong> – Score threshold below which status becomes ‘warning’</p></li>
+<li><p><strong>failure_threshold</strong> – Score threshold below which status becomes ‘failed’</p></li>
+<li><p><strong>reference_date</strong> – Date to use as the ‘current’ date (uses today if None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric.add_age_check">
+<span class="sig-name descname"><span class="pre">add_age_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric.add_age_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric.add_age_check" title="Link to this definition"></a></dt>
+<dd><p>Add an age check for a date column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Name of the date column to check</p></li>
+<li><p><strong>max_age</strong> – Maximum allowed age in days</p></li>
+<li><p><strong>warning_threshold</strong> – Age in days that triggers a warning (defaults to max_age/2)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If max_age is not positive</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric.add_freshness_check">
+<span class="sig-name descname"><span class="pre">add_freshness_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric.add_freshness_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric.add_freshness_check" title="Link to this definition"></a></dt>
+<dd><p>Add a freshness check for a date/timestamp column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Name of the date column to check</p></li>
+<li><p><strong>max_age</strong> – Maximum allowed age in days</p></li>
+<li><p><strong>warning_threshold</strong> – Age in days that triggers a warning (defaults to max_age/2)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If max_age is not positive</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric.clear" title="Link to this definition"></a></dt>
+<dd><p>Clear all configured checks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sage.metrics.timeliness.TimelinessMetric.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sage/metrics/timeliness.html#TimelinessMetric.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sage.metrics.timeliness.TimelinessMetric.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate timeliness on a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> – DataFrame to evaluate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with evaluation results</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tate Matthews.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
