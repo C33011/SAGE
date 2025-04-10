@@ -71,7 +71,7 @@ generate_html_report(results, "database_quality_report.html")
 
 ## Documentation
 
-Full documentation is available at: https://[username].github.io/sage/
+Full documentation is available at: https://C33011.github.io/sage/
 
 ## Requirements
 
