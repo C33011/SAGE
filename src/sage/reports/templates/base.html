@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}SAGE Data Quality Report</title>
+    
+    <!-- Base styles -->
+    <style>
+        :root {
+            /* Color palette */
+            --sage-primary: #2e7d32;       /* Primary green */
+            --sage-primary-light: #60ad5e; /* Light green */
+            --sage-primary-dark: #005005;  /* Dark green */
+            --sage-secondary: #455a64;     /* Secondary blue-grey */
+            --sage-accent: #ff6d00;        /* Accent orange */
+            
+            /* Status colors */
+            --status-passed: #4caf50;      /* Green */
+            --status-warning: #ff9800;     /* Orange */
+            --status-failed: #f44336;      /* Red */
+            --status-skipped: #9e9e9e;     /* Grey */
+            --status-unknown: #9c27b0;     /* Purple */
+            
+            /* Neutral colors */
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #eeeeee;
+            --neutral-300: #e0e0e0;
+            --neutral-400: #bdbdbd;
+            --neutral-500: #9e9e9e;
+            --neutral-600: #757575;
+            --neutral-700: #616161;
+            --neutral-800: #424242;
+            --neutral-900: #212121;
+            
+            /* Fonts */
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-xxl: 3rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Border radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--neutral-800);
+            background-color: var(--neutral-100);
+        }
+        
+        /* Layout */
+        .sage-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-md);
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .sage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            margin-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-logo {
+            display: flex;
+            align-items: center;
+            color: var(--sage-primary-dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .sage-logo-icon {
+            margin-right: var(--space-sm);
+            color: var(--sage-primary);
+            font-size: 1.75rem;
+        }
+        
+        .sage-topbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .sage-topbar-left h1 {
+            color: var(--neutral-900);
+            font-size: 1.75rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .sage-topbar-left p {
+            color: var(--neutral-600);
+            font-size: 1rem;
+        }
+        
+        .sage-topbar-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .sage-timestamp {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+        }
+        
+        .sage-content {
+            margin-bottom: var(--space-xxl);
+        }
+        
+        .sage-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .sage-section-title {
+            color: var(--sage-primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--sage-primary-light);
+        }
+        
+        .sage-footer {
+            margin-top: var(--space-xxl);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--neutral-200);
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Components */
+        .sage-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--neutral-200);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .sage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        /* Tables */
+        .sage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+        }
+        
+        .sage-table th, 
+        .sage-table td {
+            padding: var(--space-sm) var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-table th {
+            background-color: var(--neutral-100);
+            font-weight: 600;
+            color: var(--neutral-700);
+        }
+        
+        .sage-table tr:hover {
+            background-color: var(--neutral-50);
+        }
+        
+        .sage-table .empty-value {
+            color: var(--neutral-500);
+        }
+        
+        /* Metric Cards */
+        .sage-metric-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--neutral-200);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .sage-metric-card .card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .sage-metric-card .card-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+        
+        .sage-metric-card .card-description {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            margin-top: auto;
+        }
+        
+        /* Status indicators */
+        .status-passed {
+            color: var(--status-passed);
+        }
+        
+        .status-warning {
+            color: var(--status-warning);
+        }
+        
+        .status-failed {
+            color: var(--status-failed);
+        }
+        
+        .status-skipped {
+            color: var(--status-skipped);
+        }
+        
+        .status-unknown {
+            color: var(--status-unknown);
+        }
+        
+        .sage-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-passed.sage-status-badge {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .status-warning.sage-status-badge {
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        
+        .status-failed.sage-status-badge {
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+        
+        .status-skipped.sage-status-badge {
+            background-color: rgba(158, 158, 158, 0.1);
+        }
+        
+        .badge-icon {
+            margin-right: var(--space-xs);
+        }
+        
+        /* Charts */
+        .sage-chart {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .sage-chart img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .sage-chart figcaption {
+            margin-top: var(--space-sm);
+            font-size: 0.875rem;
+            color: var(--neutral-600);
+            text-align: center;
+        }
+        
+        /* Navigation */
+        .sage-nav {
+            margin-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-nav-list {
+            display: flex;
+            list-style: none;
+        }
+        
+        .sage-nav-item {
+            margin-right: var(--space-md);
+        }
+        
+        .sage-nav-link {
+            display: block;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--neutral-700);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .sage-nav-link:hover {
+            color: var(--sage-primary);
+        }
+        
+        .sage-nav-link.active {
+            color: var(--sage-primary);
+            border-bottom-color: var(--sage-primary);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .sage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sage-topbar {
+                flex-direction: column;
+            }
+            
+            .sage-topbar-right {
+                margin-top: var(--space-md);
+                align-items: flex-start;
+            }
+            
+            .sage-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    
+    <!-- Additional styles from specific templates -->
+    {% if extra_css %}
+        <style>
+            {{ extra_css }}
+        </style>
+    {% endif %}
+    
+    <!-- Optional JavaScript libraries -->
+    {% if use_charts %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    {% endif %}
+</head>
+<body>
+    <div class="sage-container">
+        <!-- Header -->
+        <header class="sage-header">
+            <div class="sage-logo">
+                <span class="sage-logo-icon">📊</span>
+                SAGE
+            </div>
+            <div class="sage-version">
+                v{{ version|default('0.1.0') }}
+            </div>
+        </header>
+        
+        <!-- Top bar with report title and metadata -->
+        <div class="sage-topbar">
+            <div class="sage-topbar-left">
+                <h1>{{ title|default('Data Quality Report') }}</h1>
+                <p>{{ description|default('Generated by SAGE - Spreadsheet Analysis Grading Engine') }}</p>
+            </div>
+            <div class="sage-topbar-right">
+                <div class="sage-overall-score">
+                    {% if overall_score is defined %}
+                        <span class="sage-status-badge status-{{ overall_status|default('unknown') }}">
+                            <span class="badge-icon">
+                                {% if overall_status == "passed" %}✓
+                                {% elif overall_status == "warning" %}⚠
+                                {% elif overall_status == "failed" %}✗
+                                {% else %}?{% endif %}
+                            </span>
+                            Overall Score: {{ overall_score|default(0)|percent(1) }}
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="sage-timestamp">
+                    Generated on {{ now|date("%Y-%m-%d %H:%M") }}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Optional navigation -->
+        {% if navigation %}
+            <nav class="sage-nav">
+                <ul class="sage-nav-list">
+                    {% for nav_item in navigation %}
+                        <li class="sage-nav-item">
+                            <a href="{{ nav_item.url }}" class="sage-nav-link {% if nav_item.active %}active{% endif %}">
+                                {{ nav_item.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
+        
+        <!-- Main content -->
+        <main class="sage-content">
+            {% block content %}
+            <!-- Content will be inserted here by child templates -->
+            {% endblock %}
+        </main>
+        
+        <!-- Footer -->
+        <footer class="sage-footer">
+            <div>
+                <p>SAGE - Spreadsheet Analysis Grading Engine</p>
+            </div>
+            <div>
+                <p>© {{ now|date("%Y") }} {{ author|default('') }}</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Additional scripts from specific templates -->
+    {% if extra_js %}
+        <script>
+            {{ extra_js }}
+        </script>
+    {% endif %}
+</body>
+</html>

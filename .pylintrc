@@ -1,0 +1,5 @@
+[MASTER]
+init-hook='import sys; sys.path.append("src")'
+
+[TYPECHECK]
+ignored-modules=numpy,pandas,sqlalchemy

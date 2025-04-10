@@ -1,0 +1,904 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Overall Summary Section -->
+    <section class="sage-section">
+        <h2 class="sage-section-title">Data Quality Summary</h2>
+        
+        <div class="summary-overview">
+            <!-- Overall score card -->
+            <div class="sage-card overall-score-card">
+                <div class="overall-score 
+                            {% if overall_status == 'passed' %}score-high
+                            {% elif overall_status == 'warning' %}score-medium
+                            {% elif overall_status == 'failed' %}score-low
+                            {% else %}score-unknown{% endif %}">
+                    <div class="score-value">{{ overall_score|default(0)|percent(1) }}</div>
+                    <div class="score-label">Overall Quality Score</div>
+                </div>
+                
+                {% if overall_status %}
+                    <div class="overall-status">
+                        <span class="sage-status-badge status-{{ overall_status }}">
+                            {{ overall_status|title }}
+                        </span>
+                    </div>
+                {% endif %}
+                
+                {% if analysis_summary %}
+                    <div class="analysis-summary">{{ analysis_summary }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Analysis metadata -->
+            <div class="sage-card metadata-card">
+                <h3 class="card-title">Analysis Details</h3>
+                <dl class="metadata-list">
+                    {% if source_name %}
+                        <dt>Source</dt>
+                        <dd>{{ source_name }}</dd>
+                    {% endif %}
+                    
+                    {% if analysis_date %}
+                        <dt>Analysis Date</dt>
+                        <dd>{{ analysis_date|date }}</dd>
+                    {% endif %}
+                    
+                    {% if analysis_duration %}
+                        <dt>Analysis Duration</dt>
+                        <dd>{{ analysis_duration }} seconds</dd>
+                    {% endif %}
+                    
+                    {% if row_count is defined %}
+                        <dt>Total Rows</dt>
+                        <dd>{{ row_count|default(0) }}</dd>
+                    {% endif %}
+                    
+                    {% if column_count is defined %}
+                        <dt>Total Columns</dt>
+                        <dd>{{ column_count|default(0) }}</dd>
+                    {% endif %}
+                    
+                    {% if metrics_applied is defined %}
+                        <dt>Metrics Applied</dt>
+                        <dd>{{ metrics_applied|length }}</dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Metrics Scores Section -->
+    {% if metrics is defined and metrics %}
+    <section class="sage-section">
+        <h2 class="sage-section-title">Metric Scores</h2>
+        
+        <div class="metrics-dashboard">
+            <!-- Metrics score grid -->
+            <div class="metrics-grid">
+                {% for metric_name, metric in metrics.items() %}
+                    <div class="metric-card 
+                                {% if metric.status == 'passed' %}status-passed
+                                {% elif metric.status == 'warning' %}status-warning
+                                {% elif metric.status == 'failed' %}status-failed
+                                {% else %}status-unknown{% endif %}">
+                        <div class="metric-header">
+                            <h3 class="metric-name">{{ metric_name }}</h3>
+                            <div class="metric-score">{{ metric.score|default(0)|percent(1) }}</div>
+                        </div>
+                        
+                        <div class="metric-status">
+                            <span class="sage-status-badge status-{{ metric.status|default('unknown') }}">
+                                {{ metric.status|default('Unknown')|title }}
+                            </span>
+                        </div>
+                        
+                        <div class="metric-description">
+                            {{ metric.message|default('No description available') }}
+                        </div>
+                        
+                        <div class="metric-details-link">
+                            <a href="{{ metric.details_url|default('#') }}" class="sage-button">View Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Metrics visualization -->
+            <div class="metrics-visualization sage-card">
+                {% if metrics_chart %}
+                    <div class="metrics-chart">
+                        {{ metrics_chart|safe }}
+                    </div>
+                {% else %}
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">Metrics visualization not available</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Data Profile Section -->
+    {% if data_profile is defined and data_profile %}
+    <section class="sage-section">
+        <h2 class="sage-section-title">Data Profile</h2>
+        
+        <div class="data-profile-container">
+            <!-- Statistics table -->
+            <div class="sage-card">
+                <h3 class="card-title">Dataset Statistics</h3>
+                <table class="sage-table stats-table">
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if data_profile.row_count is defined %}
+                            <tr>
+                                <td>Total Rows</td>
+                                <td>{{ data_profile.row_count|default(0) }}</td>
+                            </tr>
+                        {% endif %}
+                        
+                        {% if data_profile.column_count is defined %}
+                            <tr>
+                                <td>Total Columns</td>
+                                <td>{{ data_profile.column_count|default(0) }}</td>
+                            </tr>
+                        {% endif %}
+                        
+                        {% if data_profile.missing_cells is defined %}
+                            <tr>
+                                <td>Missing Cells</td>
+                                <td>{{ data_profile.missing_cells|default(0) }}</td>
+                            </tr>
+                        {% endif %}
+                        
+                        {% if data_profile.completeness is defined %}
+                            <tr>
+                                <td>Overall Completeness</td>
+                                <td>{{ data_profile.completeness|default(0)|percent(1) }}</td>
+                            </tr>
+                        {% endif %}
+                        
+                        {% if data_profile.duplicate_rows is defined %}
+                            <tr>
+                                <td>Duplicate Rows</td>
+                                <td>{{ data_profile.duplicate_rows|default(0) }}</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Column types summary -->
+            {% if data_profile.column_types is defined %}
+            <div class="sage-card">
+                <h3 class="card-title">Column Types</h3>
+                
+                {% if column_types_chart %}
+                    <div class="column-types-chart">
+                        {{ column_types_chart|safe }}
+                    </div>
+                {% else %}
+                    <table class="sage-table column-types-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Count</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for type_name, count in data_profile.column_types.items() %}
+                                <tr>
+                                    <td>{{ type_name|title }}</td>
+                                    <td>{{ count }}</td>
+                                    <td>{{ (count / data_profile.column_count)|percent(1) if data_profile.column_count else '0%' }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Columns table -->
+        {% if data_profile.columns is defined %}
+        <div class="sage-card columns-card">
+            <h3 class="card-title">Column Overview</h3>
+            <div class="columns-table-container">
+                <div class="table-controls">
+                    <input type="text" id="column-search" placeholder="Search columns..." class="search-input">
+                    <div class="table-filter-toggles">
+                        <label class="toggle-option">
+                            <input type="checkbox" id="show-numeric" checked>
+                            Numeric
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="show-text" checked>
+                            Text
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="show-datetime" checked>
+                            Date/Time
+                        </label>
+                        <label class="toggle-option">
+                            <input type="checkbox" id="show-other" checked>
+                            Other
+                        </label>
+                    </div>
+                </div>
+                
+                <table class="sage-table columns-table">
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>Type</th>
+                            <th>Completeness</th>
+                            <th>Unique Values</th>
+                            <th>Sample Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for column_name, column_data in data_profile.columns.items() %}
+                            <tr data-type="{{ column_data.type_category|default('other') }}">
+                                <td>{{ column_name }}</td>
+                                <td>{{ column_data.type_category|default('unknown')|title }}</td>
+                                <td class="completeness-cell" data-value="{{ column_data.completeness|default(0) }}">
+                                    <div class="completeness-bar">
+                                        <div class="completeness-value" style="width: {{ column_data.completeness|default(0)|percent(0) }}"></div>
+                                    </div>
+                                    <span>{{ column_data.completeness|default(0)|percent(1) }}</span>
+                                </td>
+                                <td>
+                                    {% if column_data.unique_count is defined %}
+                                        {{ column_data.unique_count }}
+                                        {% if column_data.total_count is defined and column_data.total_count > 0 %}
+                                            ({{ (column_data.unique_count / column_data.total_count)|percent(0) }})
+                                        {% endif %}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+                                <td class="sample-values">
+                                    {% if column_data.sample_values %}
+                                        {{ column_data.sample_values|join(', ') }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
+    
+    <!-- Key Issues Section -->
+    {% if issues is defined and issues %}
+    <section class="sage-section">
+        <h2 class="sage-section-title">Key Issues</h2>
+        
+        <div class="issues-list">
+            {% for issue in issues %}
+                <div class="issue-card {% if issue.severity %}severity-{{ issue.severity }}{% endif %}">
+                    <div class="issue-header">
+                        <h3 class="issue-title">{{ issue.title }}</h3>
+                        {% if issue.severity %}
+                            <span class="issue-severity {{ issue.severity }}">{{ issue.severity|title }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="issue-content">
+                        <p class="issue-description">{{ issue.description }}</p>
+                        
+                        {% if issue.affected_columns %}
+                            <div class="issue-details">
+                                <div class="affected-columns">
+                                    <strong>Affected Columns:</strong>
+                                    {% for column in issue.affected_columns %}
+                                        <span class="column-tag">{{ column }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if issue.examples %}
+                            <div class="issue-examples">
+                                <strong>Examples:</strong>
+                                <ul>
+                                    {% for example in issue.examples %}
+                                        <li>{{ example }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if issue.recommendation %}
+                        <div class="issue-recommendation">
+                            <strong>Recommendation:</strong> {{ issue.recommendation }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Recommendations Section -->
+    {% if recommendations is defined and recommendations %}
+    <section class="sage-section">
+        <h2 class="sage-section-title">Recommendations</h2>
+        
+        <div class="recommendations-summary">
+            <a href="{{ recommendations_url|default('#recommendations') }}" class="sage-button primary">
+                View Detailed Recommendations
+            </a>
+            <p>{{ recommendations|length }} recommendations found to improve data quality.</p>
+        </div>
+        
+        <!-- Top 3 recommendations preview -->
+        <div class="top-recommendations">
+            {% for rec in recommendations[:3] %}
+                <div class="recommendation-card {{ rec.priority|default('medium') }}">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">{{ rec.title }}</h3>
+                        <span class="recommendation-priority {{ rec.priority|default('medium') }}">
+                            {{ rec.priority|default('Medium')|title }}
+                        </span>
+                    </div>
+                    <div class="recommendation-content">
+                        <p>{{ rec.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    /* Summary Page Specific Styles */
+    .summary-overview {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-xl);
+    }
+    
+    .overall-score-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .overall-score {
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-md);
+        min-width: 200px;
+        text-align: center;
+    }
+    
+    .score-value {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+    
+    .score-label {
+        margin-top: var(--space-sm);
+        font-size: 1rem;
+        color: var(--neutral-600);
+    }
+    
+    .score-high {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: var(--status-passed);
+    }
+    
+    .score-medium {
+        background-color: rgba(255, 152, 0, 0.1);
+        color: var(--status-warning);
+    }
+    
+    .score-low {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: var(--status-failed);
+    }
+    
+    .score-unknown {
+        background-color: rgba(158, 158, 158, 0.1);
+        color: var(--neutral-600);
+    }
+    
+    .overall-status {
+        margin-bottom: var(--space-md);
+    }
+    
+    .analysis-summary {
+        font-size: 1rem;
+        color: var(--neutral-700);
+        line-height: 1.5;
+    }
+    
+    .metadata-card h3 {
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--neutral-200);
+    }
+    
+    .metadata-list {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--space-xs) var(--space-md);
+    }
+    
+    .metadata-list dt {
+        font-weight: 600;
+        color: var(--neutral-600);
+    }
+    
+    .metadata-list dd {
+        margin: 0;
+    }
+    
+    .metrics-dashboard {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: var(--space-lg);
+    }
+    
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--space-md);
+    }
+    
+    .metric-card {
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: var(--neutral-300);
+    }
+    
+    .metric-card.status-passed::before {
+        background-color: var(--status-passed);
+    }
+    
+    .metric-card.status-warning::before {
+        background-color: var(--status-warning);
+    }
+    
+    .metric-card.status-failed::before {
+        background-color: var(--status-failed);
+    }
+    
+    .metric-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .metric-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        padding-right: var(--space-sm);
+    }
+    
+    .metric-score {
+        font-size: 1.25rem;
+        font-weight: 700;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        background-color: var(--neutral-100);
+    }
+    
+    .metric-status {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .metric-description {
+        font-size: 0.875rem;
+        color: var(--neutral-700);
+        margin-bottom: var(--space-md);
+        flex-grow: 1;
+    }
+    
+    .sage-button {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        background-color: var(--neutral-100);
+        color: var(--neutral-700);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border: 1px solid var(--neutral-200);
+        transition: all 0.2s ease;
+        text-align: center;
+    }
+    
+    .sage-button:hover {
+        background-color: var(--neutral-200);
+        color: var(--neutral-900);
+    }
+    
+    .sage-button.primary {
+        background-color: var(--sage-primary);
+        color: white;
+        border-color: var(--sage-primary-dark);
+    }
+    
+    .sage-button.primary:hover {
+        background-color: var(--sage-primary-dark);
+    }
+    
+    .metrics-visualization {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+    
+    .metrics-chart {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .chart-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--neutral-50);
+        border-radius: var(--radius-md);
+        border: 1px dashed var(--neutral-300);
+        min-height: 200px;
+    }
+    
+    .placeholder-text {
+        color: var(--neutral-500);
+        font-style: italic;
+    }
+    
+    .data-profile-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .stats-table th {
+        width: 40%;
+    }
+    
+    .column-types-chart {
+        height: 250px;
+    }
+    
+    .columns-card {
+        margin-top: var(--space-lg);
+    }
+    
+    .table-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--space-md);
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+    
+    .search-input {
+        padding: var(--space-xs) var(--space-sm);
+        border: 1px solid var(--neutral-300);
+        border-radius: var(--radius-sm);
+        font-size: 0.875rem;
+        width: 250px;
+    }
+    
+    .table-filter-toggles {
+        display: flex;
+        gap: var(--space-sm);
+    }
+    
+    .toggle-option {
+        display: flex;
+        align-items: center;
+        font-size: 0.875rem;
+        cursor: pointer;
+    }
+    
+    .toggle-option input {
+        margin-right: var(--space-xs);
+    }
+    
+    .completeness-cell {
+        position: relative;
+    }
+    
+    .completeness-bar {
+        width: 100px;
+        height: 8px;
+        background-color: var(--neutral-200);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-right: var(--space-sm);
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .completeness-value {
+        height: 100%;
+        background-color: var(--sage-primary);
+        border-radius: 4px;
+    }
+    
+    .sample-values {
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .issues-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--space-md);
+    }
+    
+    .issue-card {
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .issue-header {
+        padding: var(--space-md);
+        background-color: var(--neutral-50);
+        border-bottom: 1px solid var(--neutral-200);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .issue-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .issue-severity {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        text-transform: uppercase;
+    }
+    
+    .issue-severity.high {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: var(--status-failed);
+    }
+    
+    .issue-severity.medium {
+        background-color: rgba(255, 152, 0, 0.1);
+        color: var(--status-warning);
+    }
+    
+    .issue-severity.low {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: var(--status-passed);
+    }
+    
+    .issue-content {
+        padding: var(--space-md);
+    }
+    
+    .issue-description {
+        margin-top: 0;
+        margin-bottom: var(--space-md);
+    }
+    
+    .issue-details {
+        margin-bottom: var(--space-md);
+    }
+    
+    .affected-columns {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .column-tag {
+        display: inline-block;
+        background-color: var(--neutral-100);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        margin-right: var(--space-xs);
+        margin-bottom: var(--space-xs);
+    }
+    
+    .issue-examples ul {
+        margin-top: var(--space-xs);
+        padding-left: var(--space-lg);
+        font-size: 0.875rem;
+    }
+    
+    .issue-recommendation {
+        padding: var(--space-md);
+        border-top: 1px solid var(--neutral-200);
+        background-color: rgba(46, 125, 50, 0.05);
+        font-size: 0.875rem;
+    }
+    
+    .recommendations-summary {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .top-recommendations {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--space-md);
+    }
+    
+    .recommendation-card {
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .recommendation-header {
+        padding: var(--space-md);
+        background-color: var(--neutral-50);
+        border-bottom: 1px solid var(--neutral-200);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .recommendation-title {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .recommendation-priority {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        text-transform: uppercase;
+    }
+    
+    .recommendation-priority.high {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: var(--status-failed);
+    }
+    
+    .recommendation-priority.medium {
+        background-color: rgba(255, 152, 0, 0.1);
+        color: var(--status-warning);
+    }
+    
+    .recommendation-priority.low {
+        background-color: rgba(76, 175, 80, 0.1);
+        color: var(--status-passed);
+    }
+    
+    .recommendation-content {
+        padding: var(--space-md);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .summary-overview {
+            grid-template-columns: 1fr;
+        }
+        
+        .metrics-dashboard {
+            grid-template-columns: 1fr;
+        }
+        
+        .data-profile-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .table-controls {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .search-input {
+            width: 100%;
+        }
+    }
+{% endblock %}
+
+{% block extra_js %}
+    document.addEventListener('DOMContentLoaded', function() {
+        // Column search functionality
+        const searchInput = document.getElementById('column-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', filterColumns);
+        }
+        
+        // Type filter toggles
+        const showNumeric = document.getElementById('show-numeric');
+        const showText = document.getElementById('show-text');
+        const showDatetime = document.getElementById('show-datetime');
+        const showOther = document.getElementById('show-other');
+        
+        if (showNumeric) showNumeric.addEventListener('change', filterColumns);
+        if (showText) showText.addEventListener('change', filterColumns);
+        if (showDatetime) showDatetime.addEventListener('change', filterColumns);
+        if (showOther) showOther.addEventListener('change', filterColumns);
+        
+        function filterColumns() {
+            const rows = document.querySelectorAll('.columns-table tbody tr');
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            
+            const showTypes = {
+                'numeric': showNumeric && showNumeric.checked,
+                'integer': showNumeric && showNumeric.checked,
+                'float': showNumeric && showNumeric.checked,
+                'text': showText && showText.checked,
+                'string': showText && showText.checked,
+                'datetime': showDatetime && showDatetime.checked,
+                'date': showDatetime && showDatetime.checked,
+                'time': showDatetime && showDatetime.checked,
+                'other': showOther && showOther.checked,
+                'mixed': showOther && showOther.checked,
+                'boolean': showOther && showOther.checked,
+                'categorical': showOther && showOther.checked
+            };
+            
+            rows.forEach(row => {
+                const columnName = row.cells[0].textContent.toLowerCase();
+                const columnType = row.getAttribute('data-type');
+                
+                const matchesSearch = columnName.includes(searchTerm);
+                const matchesType = showTypes[columnType] !== false; // If undefined, show it
+                
+                row.style.display = matchesSearch && matchesType ? '' : 'none';
+            });
+        }
+    });
+{% endblock %}

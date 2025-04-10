@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAGE Data Quality Report - SAGE Data Quality Report</title>
+    
+    <!-- Base styles -->
+    <style>
+        :root {
+            /* Color palette */
+            --sage-primary: #2e7d32;       /* Primary green */
+            --sage-primary-light: #60ad5e; /* Light green */
+            --sage-primary-dark: #005005;  /* Dark green */
+            --sage-secondary: #455a64;     /* Secondary blue-grey */
+            --sage-accent: #ff6d00;        /* Accent orange */
+            
+            /* Status colors */
+            --status-passed: #4caf50;      /* Green */
+            --status-warning: #ff9800;     /* Orange */
+            --status-failed: #f44336;      /* Red */
+            --status-skipped: #9e9e9e;     /* Grey */
+            --status-unknown: #9c27b0;     /* Purple */
+            
+            /* Neutral colors */
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #eeeeee;
+            --neutral-300: #e0e0e0;
+            --neutral-400: #bdbdbd;
+            --neutral-500: #9e9e9e;
+            --neutral-600: #757575;
+            --neutral-700: #616161;
+            --neutral-800: #424242;
+            --neutral-900: #212121;
+            
+            /* Fonts */
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-xxl: 3rem;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Border radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            height: 100%;
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--neutral-800);
+            background-color: var(--neutral-100);
+        }
+        
+        /* Layout */
+        .sage-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-md);
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .sage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            margin-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-logo {
+            display: flex;
+            align-items: center;
+            color: var(--sage-primary-dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .sage-logo-icon {
+            margin-right: var(--space-sm);
+            color: var(--sage-primary);
+            font-size: 1.75rem;
+        }
+        
+        .sage-topbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .sage-topbar-left h1 {
+            color: var(--neutral-900);
+            font-size: 1.75rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .sage-topbar-left p {
+            color: var(--neutral-600);
+            font-size: 1rem;
+        }
+        
+        .sage-topbar-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .sage-timestamp {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+        }
+        
+        .sage-content {
+            margin-bottom: var(--space-xxl);
+        }
+        
+        .sage-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .sage-section-title {
+            color: var(--sage-primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--sage-primary-light);
+        }
+        
+        .sage-footer {
+            margin-top: var(--space-xxl);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--neutral-200);
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Components */
+        .sage-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--neutral-200);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .sage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        /* Tables */
+        .sage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+        }
+        
+        .sage-table th, 
+        .sage-table td {
+            padding: var(--space-sm) var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-table th {
+            background-color: var(--neutral-100);
+            font-weight: 600;
+            color: var(--neutral-700);
+        }
+        
+        .sage-table tr:hover {
+            background-color: var(--neutral-50);
+        }
+        
+        .sage-table .empty-value {
+            color: var(--neutral-500);
+        }
+        
+        /* Metric Cards */
+        .sage-metric-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--neutral-200);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .sage-metric-card .card-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .sage-metric-card .card-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+        
+        .sage-metric-card .card-description {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            margin-top: auto;
+        }
+        
+        /* Status indicators */
+        .status-passed {
+            color: var(--status-passed);
+        }
+        
+        .status-warning {
+            color: var(--status-warning);
+        }
+        
+        .status-failed {
+            color: var(--status-failed);
+        }
+        
+        .status-skipped {
+            color: var(--status-skipped);
+        }
+        
+        .status-unknown {
+            color: var(--status-unknown);
+        }
+        
+        .sage-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-passed.sage-status-badge {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        .status-warning.sage-status-badge {
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        
+        .status-failed.sage-status-badge {
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+        
+        .status-skipped.sage-status-badge {
+            background-color: rgba(158, 158, 158, 0.1);
+        }
+        
+        .badge-icon {
+            margin-right: var(--space-xs);
+        }
+        
+        /* Charts */
+        .sage-chart {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .sage-chart img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .sage-chart figcaption {
+            margin-top: var(--space-sm);
+            font-size: 0.875rem;
+            color: var(--neutral-600);
+            text-align: center;
+        }
+        
+        /* Navigation */
+        .sage-nav {
+            margin-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        
+        .sage-nav-list {
+            display: flex;
+            list-style: none;
+        }
+        
+        .sage-nav-item {
+            margin-right: var(--space-md);
+        }
+        
+        .sage-nav-link {
+            display: block;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--neutral-700);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .sage-nav-link:hover {
+            color: var(--sage-primary);
+        }
+        
+        .sage-nav-link.active {
+            color: var(--sage-primary);
+            border-bottom-color: var(--sage-primary);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .sage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sage-topbar {
+                flex-direction: column;
+            }
+            
+            .sage-topbar-right {
+                margin-top: var(--space-md);
+                align-items: flex-start;
+            }
+            
+            .sage-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    
+    <!-- Additional styles from specific templates -->
+    
+    
+    <!-- Optional JavaScript libraries -->
+    
+</head>
+<body>
+    <div class="sage-container">
+        <!-- Header -->
+        <header class="sage-header">
+            <div class="sage-logo">
+                <span class="sage-logo-icon">📊</span>
+                SAGE
+            </div>
+            <div class="sage-version">
+                v0.1.0
+            </div>
+        </header>
+        
+        <!-- Top bar with report title and metadata -->
+        <div class="sage-topbar">
+            <div class="sage-topbar-left">
+                <h1>SAGE Data Quality Report</h1>
+                <p>Generated by SAGE - Spreadsheet Analysis Grading Engine</p>
+            </div>
+            <div class="sage-topbar-right">
+                <div class="sage-overall-score">
+                    
+                        <span class="sage-status-badge status-passed">
+                            <span class="badge-icon">
+                                ✓
+                                
+                            </span>
+                            Overall Score: 96.6%
+                        </span>
+                    
+                </div>
+                <div class="sage-timestamp">
+                    Generated on 2025-04-08 13:39
+                </div>
+            </div>
+        </div>
+        
+        <!-- Optional navigation -->
+        
+        
+        <!-- Main content -->
+        <main class="sage-content">
+            
+    <!-- Overall Summary Section -->
+    <section class="sage-section">
+        <h2 class="sage-section-title">Data Quality Summary</h2>
+        
+        <div class="summary-overview">
+            <!-- Overall score card -->
+            <div class="sage-card overall-score-card">
+                <div class="overall-score 
+                            score-high
+                            ">
+                    <div class="score-value">96.6%</div>
+                    <div class="score-label">Overall Quality Score</div>
+                </div>
+                
+                
+                    <div class="overall-status">
+                        <span class="sage-status-badge status-passed">
+                            Passed
+                        </span>
+                    </div>
+                
+                
+                
+                    <div class="analysis-summary">The data quality is excellent.</div>
+                
+            </div>
+            
+            <!-- Analysis metadata -->
+            <div class="sage-card metadata-card">
+                <h3 class="card-title">Analysis Details</h3>
+                <dl class="metadata-list">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </dl>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Metrics Scores Section -->
+    
+    <section class="sage-section">
+        <h2 class="sage-section-title">Metric Scores</h2>
+        
+        <div class="metrics-dashboard">
+            <!-- Metrics score grid -->
+            <div class="metrics-grid">
+                
+                    <div class="metric-card 
+                                status-passed
+                                ">
+                        <div class="metric-header">
+                            <h3 class="metric-name">completeness</h3>
+                            <div class="metric-score">97.6%</div>
+                        </div>
+                        
+                        <div class="metric-status">
+                            <span class="sage-status-badge status-passed">
+                                Passed
+                            </span>
+                        </div>
+                        
+                        <div class="metric-description">
+                            No description available
+                        </div>
+                        
+                        <div class="metric-details-link">
+                            <a href="#" class="sage-button">View Details</a>
+                        </div>
+                    </div>
+                
+                    <div class="metric-card 
+                                status-passed
+                                ">
+                        <div class="metric-header">
+                            <h3 class="metric-name">accuracy</h3>
+                            <div class="metric-score">95.5%</div>
+                        </div>
+                        
+                        <div class="metric-status">
+                            <span class="sage-status-badge status-passed">
+                                Passed
+                            </span>
+                        </div>
+                        
+                        <div class="metric-description">
+                            No description available
+                        </div>
+                        
+                        <div class="metric-details-link">
+                            <a href="#" class="sage-button">View Details</a>
+                        </div>
+                    </div>
+                
+            </div>
+            
+            <!-- Metrics visualization -->
+            <div class="metrics-visualization sage-card">
+                
+                    <div class="metrics-chart">
+                        
+        <figure id="score-chart-bf13c811" class="sage-chart">
+            <img src="data:image/png;base64,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yy+rR48ekqQCBQrIy8uLdcEBIJvNnz9f4eHhqlKlivr3768//vhDf/zxh06dOqVXX31VklSpUiWdPXtW9erVU7FixexcMZBzER6ALDAMwxocBg8erIiICBUsWFAJCQlatmyZBgwYoJiYGC1ZskTvvPOOAgMD9d133yktLU3t27e3c/UAkHt89tln2rRpkwYPHqx69epJkvLnz68vv/xSv/76q2rWrClJ2rp1q2rVqqWRI0dK4nJSIDOEByAL0pdSjYyM1Lp167R9+3YZhqFFixapYcOG2rp1qyZOnKiKFStq6tSpCggIUOHChbVu3To5OTnxRwkAsskff/yhZcuW6fLly3r11VetowpVqlRRqVKlrIHi5s2bWr58uaQ7PxDxGQ3cHeEByKIZM2boxx9/VIUKFfTMM89Ikp588kkZhqHnn39e69evV+fOndWhQwe5ublZ92PiHQA8fDNmzFCtWrU0fPhwFShQQB999JEWLFigrl27qmDBgnrmmWf05ptvKjo6Wrdu3dL48eOtqyoRHIDM8Q0GyCJvb2+tXbtWfn5+Onr0qMqVKycfHx+NGDFCjo6OatKkiRYvXqyWLVta9+HO0QCQPWbOnKl///vf+u6779S7d28lJiZq+vTpcnd3V4cOHVSoUCF17NjRZh9+3AHuj6VaARP+OjlauhMCHBwctGHDBnXp0kWhoaHq16+fgoKCJN25gdC7776rX3/9Vdu3b7dX2QCQq9WvX1/nzp3TqlWrVLFiRY0fP14zZszQgAED1K5dO/n7+9u7ROCRQ3gA7uOvweHTTz/V6dOndejQIfXt21cvvviiduzYoW7duql9+/bq3bu3SpYsKUlKTEyUp6endX4EAODh2rRpk6pWraoCBQpY2+rWrauLFy9q5cqVqlixoiZOnKj3339f8+fPV9u2be1YLfBo4j4PwH2kB4dhw4Zp1KhR8vHxUcWKFdWjRw/169dPjRo10rRp07R48WJ99tlnOnnypCQpT548cnBwEPkcAB6+yMhIDRw4UB999JH+/PNPa/v27dsVEBCgdu3a6fDhwxo4cKDmzJmjV155xY7VAo8uRh6Ae0ifOHfmzBm98sorioiIUK1atbR7927VqVNHq1evVpkyZVSmTBl9++23ateunaZMmaLevXvbu3QAyHVmzpypZcuWqUqVKnr//feVP39+SdKBAwf0zDPPqGLFilq+fLlKly4tieVYgaxgVhDwN1FRUdq1a5d69+5t80clNjZWTzzxhFavXq1XX31VU6dO1bPPPqvXXntNI0aMUKtWrbR+/XrVrVvXjtUDQO4yc+ZMnThxQomJiRo7dqxu3ryp7777TmPGjNHw4cPl4+MjSerWrZt8fX2tc9MkERyALCA8AH/j6+urQYMG6ejRoypatKieeuopPffcc6pZs6YmTJigWbNmadKkSerevbsk6fTp09q8ebOCg4NVv359SfyaBQDZ4f3339eXX36pjh076urVq9q7d6/effddOTo6at26derdu7deffVVTZ8+XYGBgZowYYIkPqOBf4LwAPxNiRIltHHjRj3//PNKSUlRbGysChUqpNKlS2vSpEnq27evNTjEx8fLy8tLTzzxhM0x+KMEAA/X+fPntX79ei1atEgNGjSQJOscszZt2sjDw0MLFy5Ur169VKJECX366afWPnxGA1lHeADuIjU1VZLk7u6uESNGaObMmZowYYL+/PNPrVmzRqmpqSpUqJB27dqltLQ0hYaG2rliAMhdEhMTdezYMaWlpVnbUlNTtWfPHvXp00fbt29X165ddeHCBQUFBcnR0ZH7OAAPAKstAbqzHOtf1alTR5cvX9Z3332n+fPnq0uXLpKk2bNnq1evXkpMTNSOHTtUsmRJ7d2713pXUgDAw2UYhlJSUlSqVCnVqlVLP/30k27cuCFJcnFxUUhIiC5fvqytW7fK1dVVpUqVkqOjoywWC8EBeAD4V4Rc76/3cVi7dq1Onz6tfPnyqXz58nr++ee1ePFidejQQQ4ODvrqq680cOBAJSYmKk+ePNZj8GsWADx848eP16FDh3Ty5El9+eWXevrpp/XNN98oMDBQr7zyivLkyaMrV64oICDAOlE63V9v9Akg6/i2g1wrPTSk/0EZPHiwlixZorJly8rX11c9evTQokWL1Lx5cy1evFht27bVtWvX5OLiolatWql9+/aS7vwKRnAAgIdr1KhRioiI0AcffCA/Pz/FxMRo3LhxunnzpmbOnKn169erYsWK2rZtmxwcHFSnTh17lww8lojhyJWuXr0qR0dH66VG27Zt08KFC7Vo0SKtX79e//rXv3Tr1i0ZhqG4uDg1btxYK1eu1JUrV3Tp0iWbOQ7cQRoAHq74+Hht27ZN06ZN09tvv60pU6aoYcOGkqS+ffsqNDRUXl5e2rJliwIDAxUZGSknJycuJwUeAsIDcp2PP/5YVatW1aVLl6wrbiQmJurJJ59UcHCwli9frrfffltffvmlKleurAEDBuj06dNq0KCBNm/erO3btzPHAQCyUXJysg4cOKBr165Z29LS0nTkyBG1adNGDRs21Oeff67Vq1fryy+/lIuLi1JTU1lVCXgICA/IderUqaPKlSurZcuWunTpkiQpb968On/+vCZPnqyuXbtq/Pjx6tatmy5fvqzvv/9eMTExkiRnZ2c5ODiw1B8AZINNmzZp27ZtunLlirp3766tW7fq1KlTku5Mji5fvrwsFos2b94sSXJzc5PE5aTAw8S/LOQ6devWlZubm0aPHq2XX35Z3377rerUqaNnn31Ww4YN04ABA9SrVy9JUvHixVWwYMEMlyZxqRIAPFyDBg3S7Nmz5eXlpTJlysjPz0+3bt3SrFmz9OabbyooKEgJCQnKmzevChcubLMvn9HAw+NgpN9RBXjMGYZh8wclMjJSI0eOVFxcnL7//ntdvHhRQ4cOVVJSkt58803ly5dPU6ZM0dWrV7V7925W6gCAbDJ+/HhNnDhRK1eulKurq0aNGqU//vhDXl5eypcvn86ePavy5cvrzJkzunr1qvbv389IA5BN+DaEXMFisViDw7Vr12SxWBQcHKxJkyYpf/78atKkiQIDAzV+/HiVLVtW3bt314cffiiLxaIdO3ZY1wgHADxcaWlp2rt3rz7++GM999xzMgxDe/bskb+/v9LS0lSyZEn16dNHhmGodu3a1uDAPDQgezDygFxl1KhR+u6772SxWFSqVClNmzZNZ86cUXh4uOLi4rRq1SoVKlRIFy5cUJ48eZQvXz45ODhwHwcAyCY3btxQlSpVNGTIEIWGhqpfv36qVq2aGjRooB49eighIUEDBw603rxT4l47QHZi5AGPtb+OFsybN09TpkxR9+7d1alTJx0/flwhISFycnLSRx99JB8fHzVv3lznzp1TYGCg8ufPLwcHB+5KCgDZKG/evJo3b56qVKmiHTt2KCEhQXXr1lXVqlVVuHBhubq6auHChfrrb598RgPZh5EH5Apz587VuXPn5OnpqUGDBlnbX3zxRV26dElRUVGKjo5W9+7dVbFiRc2ePduO1QJA7pY+R61jx45KTU3VkiVLdOvWLbVq1UqvvfaaXn31VZt+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" alt="Metric Scores" class="sage-chart-img">
+            <figcaption>Metric Scores</figcaption>
+        </figure>
+        
+                    </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Data Profile Section -->
+    
+    <section class="sage-section">
+        <h2 class="sage-section-title">Data Profile</h2>
+        
+        <div class="data-profile-container">
+            <!-- Statistics table -->
+            <div class="sage-card">
+                <h3 class="card-title">Dataset Statistics</h3>
+                <table class="sage-table stats-table">
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td>Total Rows</td>
+                                <td>None</td>
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                <td>Total Columns</td>
+                                <td>None</td>
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                <td>Missing Cells</td>
+                                <td>0</td>
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                <td>Overall Completeness</td>
+                                <td>95.0%</td>
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                <td>Duplicate Rows</td>
+                                <td>0</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Column types summary -->
+            
+        </div>
+        
+        <!-- Columns table -->
+        
+    </section>
+    
+    
+    <!-- Key Issues Section -->
+    
+    
+    <!-- Recommendations Section -->
+    
+    <section class="sage-section">
+        <h2 class="sage-section-title">Recommendations</h2>
+        
+        <div class="recommendations-summary">
+            <a href="#recommendations" class="sage-button primary">
+                View Detailed Recommendations
+            </a>
+            <p>3 recommendations found to improve data quality.</p>
+        </div>
+        
+        <!-- Top 3 recommendations preview -->
+        <div class="top-recommendations">
+            
+                <div class="recommendation-card high">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Improve Data Completeness</h3>
+                        <span class="recommendation-priority high">
+                            High
+                        </span>
+                    </div>
+                    <div class="recommendation-content">
+                        <p>Address missing values in key fields to improve completeness metrics.</p>
+                    </div>
+                </div>
+            
+                <div class="recommendation-card medium">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Standardize Date Formats</h3>
+                        <span class="recommendation-priority medium">
+                            Medium
+                        </span>
+                    </div>
+                    <div class="recommendation-content">
+                        <p>Ensure consistent date formatting across all fields.</p>
+                    </div>
+                </div>
+            
+                <div class="recommendation-card low">
+                    <div class="recommendation-header">
+                        <h3 class="recommendation-title">Review Outlier Values</h3>
+                        <span class="recommendation-priority low">
+                            Low
+                        </span>
+                    </div>
+                    <div class="recommendation-content">
+                        <p>Investigate statistical outliers in numeric fields.</p>
+                    </div>
+                </div>
+            
+        </div>
+    </section>
+    
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="sage-footer">
+            <div>
+                <p>SAGE - Spreadsheet Analysis Grading Engine</p>
+            </div>
+            <div>
+                <p>© 2025 </p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Additional scripts from specific templates -->
+    
+</body>
+</html>
